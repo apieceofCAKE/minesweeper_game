@@ -8,6 +8,10 @@ células ocupadas representam bombas e vazias representam células seguras.
 Imprima a
 matriz usando * para bombas e “.” para células seguras. Então, substitua cada célula segura
 pelo número de bombas vizinhas (acima, abaixo, à direita e à esquerda).
+
+Reference:
+    https://cboard.cprogramming.com/c-programming/152639-simple-minesweeper-[c]-kinda-eh.html
+    http://www.minesweeper.info/wiki/Windows_Minesweeper
 */
 
 #include <stdio.h>
@@ -28,7 +32,7 @@ void welcome_display();
 int difficulty_seletor();
 int control_board_creator(int difficulty);
 void showed_board_creator();
-void board_printer(char *board);
+void board_printer(char board[BOARD_SIZE][BOARD_SIZE]);
 int player_input_and_board_update();
 int mine_checker(int row, int col);
 int game_status(int status_code);
@@ -39,8 +43,37 @@ int main() {
 
     char showed_board[BOARD_SIZE][BOARD_SIZE];
     char control_board[BOARD_SIZE][BOARD_SIZE];
+    int difficulty;
+    int number_of_bombs;
+    int status_code = KEEP_ON;
+
+    welcome_display();
+
+    difficulty = difficulty_seletor();
+
+    number_of_bombs = control_board_creator(difficulty);
+    printf("\nThe board has %d bombs. Here we go!\n", number_of_bombs);
+
+    showed_board_creator();
 
     //Loop to keep the game going
+    while (status_code == KEEP_ON || status_code == REPLAY) {
+
+        board_printer(showed_board);
+
+        status_code = player_input_and_board_update();
+        status_code = game_status(status_code);
+
+        if (status_code == REPLAY) {
+
+            difficulty = difficulty_seletor();
+
+            number_of_bombs = control_board_creator(difficulty);
+            printf("\nThe board has %d bombs. Here we go again!\n", number_of_bombs);
+
+            showed_board_creator();
+        }
+    }
 
     return 0;
 }
@@ -82,7 +115,7 @@ void showed_board_creator() {
 }
 
 
-void board_printer(char *board) {
+void board_printer(char board[BOARD_SIZE][BOARD_SIZE]) {
     /*
     Prints the parameter array in a user friendly way
     */
