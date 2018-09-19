@@ -1,2 +1,2 @@
 # minesweeper_game
-Console minesweeper. Part of programming class exercise list.
+WORK IN PROGRESS. Console minesweeper. Part of programming class exercise list.
