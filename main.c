@@ -16,7 +16,7 @@ Reference:
 
 #include <stdio.h>
 
-//The game board has 16x16 blocks, equivalent to 'intermediate' in Windows Minesweeper
+//The game board can change by changing this defined constant
 #define BOARD_SIZE 10
 
 //Definitions for status_code, to improve code readability
