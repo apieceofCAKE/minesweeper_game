@@ -269,7 +269,9 @@ int player_input_and_board_update(char control_board[BOARD_SIZE][BOARD_SIZE],
     else {
 
         control_board[row][col] = 'x';
-        showed_board[row][col] = mine_checker_feedback + '0';
+        
+        //Using ASCII table to properly cast char type to integer;
+        showed_board[row][col] = (char) (mine_checker_feedback + 48);
 
         return KEEP_ON;
     }
