@@ -28,5 +28,5 @@ stages:
           clean: all
         displayName: Run script
         steps:
-          - script: echo Hello from staging!
+          - script: echo "Hello from staging!"
             displayName: 'Run a one-line script'
